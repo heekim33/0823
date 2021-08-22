@@ -35,3 +35,23 @@ sales <- data.frame(fruit = c("사과", "딸기", "수박"), price = c(1800, 1500, 300
 sales
 mean(sales$price)
 
+# 구동방식 별 고속도로 연비 평균 구하기
+install.packages("dplyr")
+install.packages("ggplot2")
+library(dplyr)
+library(ggplot2)
+
+mpg <- as.data.frame(ggplot2::mpg)
+View(mpg)
+boxplot(mpg$hwy)
+
+boxplot(mpg$hwy)$stats  # 상자그림 통계치 출력
+
+mpg$hwy <- ifelse(mpg$hwy < 12 | mpg$hwy > 37, NA, mpg$hwy)
+table(is.na(mpg$hwy))
+
+mpg %>%
+  group_by(drv) %>%
+  summarise(mean_hwy = mean(hwy, na.rm = T))
+
+
